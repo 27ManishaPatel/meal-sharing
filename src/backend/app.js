@@ -39,41 +39,51 @@ const knex = require('knex')({
 app.get('/future-meals', async(req, res) => {
   const dbResult = await knex.raw('SELECT * FROM meal WHERE when_date > NOW()')
   const rows = dbResult[0]
-  res.json({
-     rows
-  })
+  if (rows.length === 0){
+    res.status(404).json({ status : 'No meals available'})
+  }else {
+    res.json(rows)
+  }
 });
 //Respond with all meals in the past (relative to the when datetime)
 app.get('/past-meals', async(req, res) => {
   const dbResult = await knex.raw('SELECT * FROM meal WHERE when_date < NOW()')
   const rows = dbResult[0]
-  res.json({
-     rows
-  })
+  if (rows.length === 0){
+    res.status(404).json({ status : 'No meals available'})
+  }else {
+    res.json(rows)
+  }
 })
 //Respond with all meals sorted by ID
 app.get('/all-meals', async(req, res) => {
   const dbResult = await knex.raw('SELECT * FROM meal ORDER BY id')
   const rows = dbResult[0]
-  res.json({
-     rows
-  })
+  if (rows.length === 0){
+    res.status(404).json({ status : 'No meals available'})
+  }else {
+    res.json(rows)
+  }
 })
 //Respond with the first meal (meaning with the minimum id)
 app.get('/first-meal', async(req, res) => {
   const dbResult = await knex.raw('SELECT * FROM meal ORDER BY id LIMIT 1')
   const rows = dbResult[0]
-  res.json({
-     rows
-  })
+  if (rows.length === 0){
+    res.status(404).json({ status : 'No meals available'})
+  }else {
+    res.json(rows)
+  }
 })
 //Respond with the last meal (meaning with the maximum id)
 app.get('/last-meal', async(req, res) => {
   const dbResult = await knex.raw('SELECT * FROM meal ORDER BY id DESC LIMIT 1')
   const rows = dbResult[0]
-  res.json({
-     rows
-  })
+  if (rows.length === 0){
+    res.status(404).json({ status : 'No meals available'})
+  }else {
+    res.json(rows)
+  }
 })
 
 if (process.env.API_PATH) {
