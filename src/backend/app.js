@@ -3,7 +3,10 @@ const app = express();
 const router = express.Router();
 const path = require("path");
 
+const knex = require("../backend/database");
+
 const mealsRouter = require("./api/meals");
+const reservationsRouter = require("./api/reservations");
 const buildPath = path.join(__dirname, "../../dist");
 const port = process.env.PORT || 3000;
 const cors = require("cors");
@@ -20,21 +23,13 @@ app.use(express.json());
 app.use(cors());
 
 router.use("/meals", mealsRouter);
+router.use("/api/reservations", reservationsRouter);
 
 //after the line where it says router.use("/meals", mealsRouter);. There you can go ahead and define the desired routes like you normally would:
 
 app.get("/my-route", (req, res) => { res.send("Hi friend") });
 
-const knex = require('knex')({
-  client: 'mysql2',
-  connection: {
-      host : '127.0.0.1',
-      port: 3306,
-      user: 'root',
-      password: '12345678',
-      database: 'meal_sharing'
-  }
-})
+
 //Respond with all meals in the future (relative to the when datetime)
 app.get('/future-meals', async(req, res) => {
   const dbResult = await knex.raw('SELECT * FROM meal WHERE when_date > NOW()')
