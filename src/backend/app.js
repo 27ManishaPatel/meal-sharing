@@ -3,7 +3,7 @@ const app = express();
 const router = express.Router();
 const path = require("path");
 
-const knex = require("../backend/database");
+const knex = require("./database");
 
 const mealsRouter = require("./api/meals");
 const reservationsRouter = require("./api/reservations");
@@ -23,12 +23,11 @@ app.use(express.json());
 app.use(cors());
 
 router.use("/meals", mealsRouter);
-router.use("/api/reservations", reservationsRouter);
+router.use("/reservations", reservationsRouter);
 
 //after the line where it says router.use("/meals", mealsRouter);. There you can go ahead and define the desired routes like you normally would:
 
 app.get("/my-route", (req, res) => { res.send("Hi friend") });
-
 
 //Respond with all meals in the future (relative to the when datetime)
 app.get('/future-meals', async(req, res) => {
