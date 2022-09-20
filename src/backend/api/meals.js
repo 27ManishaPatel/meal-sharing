@@ -8,29 +8,31 @@
      const meals = await knex("meal").select("*");
      if(meals.length === 0){
       response.status(404).send("No meals available !")
+     }else{
+      response.send(meals);
      }
-      response.json(meals);
     } catch (error) {
       throw response.status(404).send(error);
     }
  });
 // POST /api/meals
 
-router.put("/:id", async (request, response) => {
+router.post("/", async (request, response) => {
   try {
-    // knex syntax for selecting things. Look up the documentation for knex for further info
-    const insertedData = await knex('meal').insert({
-      title: 'Pav-bhaji',
-      description: 'Bread bun with vegetable curry',
-      location: 'Soborg',
-      when: '2022-09-03',
-      max_reservations: 8,
-      price: 180,
-      created_date: '2022-09-03'
+    const [insertedData] = await knex('meal').insert({
+      id: request.body.id,
+      title: request.body.title,
+      description: request.body.description,
+      location: request.body.location,
+      when_date: request.body.when_date,
+      max_reservations: request.body.max_reservations,
+      price: request.body.price,
+      created_date: request.body.created_date
     });
-    res.json(insertedData)
+    const meals = await knex('meal')
+    response.status(201).send({ message: "Created meal", id: insertedData, meals: meals })
   } catch (error) {
-    throw response.status(404).json(error);
+    throw error;
   }
 });
 
@@ -55,12 +57,13 @@ router.put("/:id", async (request, response) => {
   try {
    // knex syntax for selecting things. Look up the documentation for knex for further info
    const id = request.params.id ;
+   const updatedMeal = await knex("meal").where('id', id).update(request.body);
    const meals = await knex("meal").select("*");
-   const updatedMeals = await knex("meal").where('id', id).update("price", "300.00");
-   if(meals.length === 0){
+   if(updatedMeal !== 0){
+    response.send({message: "Updated meal", idUpdated: id, Meals: meals});
+   }else{
     response.status(404).send("No meals available to update !")
    }
-    response.json(updatedMeals);
   } catch (error) {
     throw response.status(404).send(error);
   }
@@ -72,10 +75,13 @@ router.delete("/:id", async (request, response) => {
    // knex syntax for selecting things. Look up the documentation for knex for further info
    const id = request.params.id ;
    const deletedMeals = await knex("meal").where('id', id).del();
-   if(!deletedMeals){
+   const meals = await knex("meal").select("*");
+   if(deletedMeals != 0){
+    response.send({message: "Deleted meal", deletedMealId : id, meals : meals });
+   }else{
     response.status(404).send("No meals available !")
    }
-    response.json(deletedMeals);
+    
   } catch (error) {
     throw response.status(404).send(error);
   }

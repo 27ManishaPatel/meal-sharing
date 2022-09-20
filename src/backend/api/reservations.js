@@ -9,9 +9,9 @@ const knex = require("../database");
      const reservations = await knex("reservation").select("*");
      if(reservations.length === 0){
       response.status(404).send("No reservations available !")
-     }
-     console.log(reservations  + "no reservations")
+     }else{
       response.send(reservations);
+     }
     } catch (error) {
       throw response.status(404).send(error);
     }
@@ -20,18 +20,21 @@ const knex = require("../database");
  // PUT /api/reservations Adds a new reservation to the database
 router.post("/", async (request, response) => {
   try {
-    const insertedReservation = await knex('reservation').insert({
-      id: 5,
-      number_of_guests: 6,
-      meal_id: 2,
-      created_date: '2022-09-13',
-      contact_phonenumber: '91454545',
-      contact_name: 'Rudra',
-      contact_email: 'rudra@gmail.com'
+    const [insertedReservation] = await knex('reservation').insert({
+      id: request.body.id,
+      number_of_guests: request.body.number_of_guests,
+      meal_id: request.body.meal_id,
+      created_date: request.body.created_date,
+      contact_phonenumber: request.body.contact_phonenumber,
+      contact_name: request.body.contact_name,
+      contact_email: request.body.contact_email
     });
-    response.send(insertedReservation)
+    const reservations = await knex("reservation").select("*");
+    if(insertedReservation != 0){
+      response.send({message: "New reservation", insertedId : insertedReservation, Reservations: reservations})
+    }
   } catch (error) {
-    throw request.status(404).send(error);
+    throw response.status(404).send(error);
   }
 });
 
@@ -55,12 +58,14 @@ router.put("/:id", async (request, response) => {
   try {
    // knex syntax for selecting things. Look up the documentation for knex for further info
    const id = request.params.id ;
-   const updatedReservations = await knex("reservation").where('id', id).update("number_of_guests", 11);
+   const updatedReservations = await knex("reservation").where('id', id).update(request.body);
    const reservations = await knex("reservation").select("*");
-   if(reservations.length === 0){
+   if(updatedReservations != 0){
+    response.status(201).send({message: "updated reservation", updatedId: id, Reservations: reservations })
+   }else{
     response.status(404).send("No reservations available to update !")
    }
-    response.send(updatedReservations);
+    ;
   } catch (error) {
     throw response.status(404).send(error);
   }
@@ -71,11 +76,13 @@ router.delete("/:id", async (request, response) => {
   try {
    // knex syntax for selecting things. Look up the documentation for knex for further info
    const id = request.params.id ;
-   const deletedReservations = await knex("reservation").where('id', id).del;
-   if(!deletedReservations){
+   const deletedReservations = await knex("reservation").where('id', id).del();
+   const reservations = await knex("reservation").select("*");
+   if(deletedReservations != 0){
+    response.send({message: "Deleted reservation", deletedId : id, Reservations : reservations });
+   }else{
     response.status(404).send("No reservations available !")
    }
-    response.send(deletedReservations);
   } catch (error) {
     throw response.status(404).send(error);
   }
