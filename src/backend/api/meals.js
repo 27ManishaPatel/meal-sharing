@@ -3,52 +3,35 @@ const router = express.Router();
 const knex = require("../database");
 
 router.get("/", async (request, response) => {
-  try {
     //maxPrice
     if("maxPrice" in request.query){
       const maxPrice = Number(request.query.maxPrice);
       if(isNaN(maxPrice)){
         response.send('maxPrice should be a number!')
       }else{
-         meals = await knex("meal").where("price", "<", maxPrice);
+         meals = knex("meal").where("price", "<", maxPrice);
       }
     }
      //availableReservations
-    //  if ('availableReservations' in request.query) {
-    //   const reqReservation = request.query.availableReservations
-    //   if(false(reqReservation)){
-    //     response.send("no available Reservations !")
-    //   }else if(true(reqReservation)){
-    //     meals = knex('meal').join('reservations',  'meal.id', '=', 'reservation.meal_id' )
-    //     .select('meal.id',
-    //       'title',
-    //       'max_reservations',
-    //       knex.raw('SUM(number_of_guests) AS total_guests'),
-    //       knex.raw('(max_reservations-SUM(number_of_guests)) AS "AvailableReservation"')
-    //     )
-    //     .where("max_reservations", ">", "number_of_guests")
-    //       .groupBy('meal.id')
-    //       .having('(max_reservations-SUM(number_of_guests)) > 0')
-    //   }
-    // }
+ 
      //title
     if("title" in request.query) {
       const reqTitle = request.query.title;
       if(!isNaN(reqTitle)){
         response.send("Title should be a string! ")
       }else{
-        meals = await knex('meal').where("title", "like", `%${reqTitle}%`)
+        meals = knex('meal').where("title", "like", `%${reqTitle}%`)
       }
     }
     //dateAfter
     if("dateAfter" in request.query){
       const reqDate = new Date(request.query.dateAfter)
-      meals = await knex('meal').where("when_date", ">", reqDate )
+      meals =  knex('meal').where("when_date", ">", reqDate )
     }
     //dateBefore
     if("dateBefore" in request.query){
       const dateReq = new Date(request.query.dateBefore)
-      meals = await knex('meal').where("when_date", "<", dateReq  )
+      meals =  knex('meal').where("when_date", "<", dateReq  )
     }
     //limit
     if("limit" in request.query){
@@ -56,17 +39,33 @@ router.get("/", async (request, response) => {
       if(isNaN(request.query.limit)){
         response.send('enter a number!')
       }else{
-        meals = await knex('meal').limit(limit)
+        meals =  knex('meal').limit(limit)
       }
     }
-    response.send(meals)
-   
-    //sort_key
-    // const reqKeys = request.query.sort_key
-    // const keysSortedMeals = 
-    
-   } catch (error) {
-     throw response.status(404).send(error);
+    //api/meals?sort_key=price&sort_dir=desc together
+    if("sort_key" in request.query){
+      const sortKey = request.query.sort_key;
+      const sortDir = request.query.sort_dir;
+      const array = ["price", "when_date", "max_reservations"]
+      array.forEach( arr =>{
+        if (sortKey == arr && sortDir == "desc"){
+          meals = knex('meal').orderBy(arr, "desc")
+        }else
+         if(sortKey == arr){
+          meals = knex('meal').orderBy(arr)
+        }
+      })
+    }
+    //api/meals?sort_key=price&sort_dir=desc
+    try{
+      const allMeals = await meals;
+      if(allMeals.length === 0){
+        response.send([]);
+      }else{
+        response.send(allMeals);
+      }
+    } catch (error) {
+     throw (error);
    }
 });
 // POST /api/meals
