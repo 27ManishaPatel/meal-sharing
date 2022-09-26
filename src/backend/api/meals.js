@@ -13,7 +13,14 @@ router.get("/", async (request, response) => {
       }
     }
      //availableReservations
- 
+    if("availableReservations" in request.query){
+      const reqAvailReservation = request.query.availableReservations;
+      if(reqAvailReservation != 'true'){
+        response.send('enter true value of availableReservations!')
+      }else {
+        meals = knex.raw(`select meal.id , meal.title, (meal.max_reservations)-(reservation.number_of_guests) AS AvailableReservation from meal inner join reservation on meal.id = reservation.meal_id where ((max_reservations)-(number_of_guests)) > 0`)
+      }
+    }
      //title
     if("title" in request.query) {
       const reqTitle = request.query.title;
@@ -57,7 +64,7 @@ router.get("/", async (request, response) => {
       })
     }
     //api/meals?sort_key=price&sort_dir=desc
-    try{
+  try{
       const allMeals = await meals;
       if(allMeals.length === 0){
         response.send([]);
