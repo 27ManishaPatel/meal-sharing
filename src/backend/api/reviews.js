@@ -7,11 +7,7 @@ const knex = require('../database');
 router.get('/', async (request, response) => {
     try {
         const allReviews = await knex('review').select('*')
-         if(allReviews.length === 0){
-          response.status(404).send("No reviews available !")
-         }else{
           response.send(allReviews);
-         }
         } catch (error) {
           throw response.status(404).send(error);
         }
@@ -22,19 +18,15 @@ router.get('/', async (request, response) => {
 router.post("/", async (request, response) => {
     try {
       const [insertedReviews] = await knex('review').insert({
-        id: request.body.id,
         title: request.body.title,
         description: request.body.description,
         meal_id: request.body.meal_id,
         stars: request.body.stars,
-        created_date: request.body.created_date,
       });
-      const reviews = await knex("review").select("*");
-      if(insertedReviews != 0){
-        response.send({message: "New review", insertedId : insertedReviews, Reviews: reviews})
-      }
+      response.send({message: "New review", insertedId : insertedReviews})
+      
     } catch (error) {
-      throw response.status(404).send(error);
+       response.status(500).send(error);
     }
   });
 
@@ -45,7 +37,7 @@ router.get("/:id", async (request, response) => {
      const id = request.params.id ;
      const reviews = await knex("review").select("*").where('id', id);
      if(reviews.length === 0){
-      response.status(404).send("No reviews available !")
+      response.status(404).send({ error: "Review not found" })
      }
       response.send({reviews});
     } catch (error) {
@@ -58,11 +50,10 @@ router.get("/:id", async (request, response) => {
      // knex syntax for selecting things. Look up the documentation for knex for further info
      const id = request.params.id ;
      const updatedReviews = await knex("review").where('id', id).update(request.body);
-     const reviews = await knex("review").select("*");
-     if(updatedReviews != 0){
-      response.status(201).send({message: "updated review", updatedId: id, Reviews: reviews })
-     }else{
-      response.status(404).send("No reviews available to update !")
+     if(updatedReviews !== 0){
+      response.status(201).send({message: "updated review", updatedId: id })
+     }else {
+      response.status(404).send({error : "No reviews available to update !"})
      }
       ;
     } catch (error) {

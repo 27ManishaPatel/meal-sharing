@@ -57,8 +57,7 @@ router.get("/", async (request, response) => {
       array.forEach( arr =>{
         if (sortKey == arr && sortDir == "desc"){
           meals = knex('meal').orderBy(arr, "desc")
-        }else
-         if(sortKey == arr){
+        }else if(sortKey == arr){
           meals = knex('meal').orderBy(arr)
         }
       })
@@ -66,11 +65,7 @@ router.get("/", async (request, response) => {
     //api/meals?sort_key=price&sort_dir=desc
   try{
       const allMeals = await meals;
-      if(allMeals.length === 0){
-        response.send([]);
-      }else{
         response.send(allMeals);
-      }
     } catch (error) {
      throw (error);
    }
