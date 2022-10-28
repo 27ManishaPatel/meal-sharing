@@ -15,7 +15,7 @@ router.get("/", async (request, response) => {
      //availableReservations
     if("availableReservations" in request.query){
       const reqAvailReservation = request.query.availableReservations;
-      if(reqAvailReservation != 'true'){
+      if(reqAvailReservation !== 'true'){
         response.send('enter true value of availableReservations!')
       }else {
         meals = knex.raw(`select meal.id , meal.title, (meal.max_reservations)-(reservation.number_of_guests) AS AvailableReservation from meal inner join reservation on meal.id = reservation.meal_id where ((max_reservations)-(number_of_guests)) > 0`)
@@ -131,7 +131,7 @@ router.delete("/:id", async (request, response) => {
   const id = request.params.id ;
   const deletedMeals = await knex("meal").where('id', id).del();
   const meals = await knex("meal").select("*");
-  if(deletedMeals != 0){
+  if(deletedMeals !== 0){
    response.send({message: "Deleted meal", deletedMealId : id, meals : meals });
   }else{
    response.status(404).send("No meals available !")

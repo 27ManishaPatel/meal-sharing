@@ -67,7 +67,7 @@ router.delete("/:id", async (request, response) => {
      const id = request.params.id ;
      const deletedReviews = await knex("review").where('id', id).del();
      const reviews = await knex("review").select("*");
-     if( deletedReviews != 0){
+     if( deletedReviews !== 0){
       response.send({message: "Deleted review", deletedId : id, Reviews :  reviews  });
      }else{
       response.status(404).send("No  reviews available !")
