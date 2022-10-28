@@ -7,6 +7,9 @@ const knex = require("./database");
 
 const mealsRouter = require("./api/meals");
 const reservationsRouter = require("./api/reservations");
+
+const reviewsRouter = require("./api/reviews")
+
 const buildPath = path.join(__dirname, "../../dist");
 const port = process.env.PORT || 3000;
 const cors = require("cors");
@@ -24,6 +27,7 @@ app.use(cors());
 
 router.use("/meals", mealsRouter);
 router.use("/reservations", reservationsRouter);
+router.use("/reviews", reviewsRouter)
 
 //after the line where it says router.use("/meals", mealsRouter);. There you can go ahead and define the desired routes like you normally would:
 
