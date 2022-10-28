@@ -38,7 +38,11 @@ router.post("/", async (request, response) => {
   }
 });
 
+
 //GET /api/reservations/:id
+
+//GET /api/meals/:id
+
 router.get("/:id", async (request, response) => {
   try {
    // knex syntax for selecting things. Look up the documentation for knex for further info
@@ -53,7 +57,11 @@ router.get("/:id", async (request, response) => {
   }
 });
 
+
 //PUT /api/reservations/:id
+
+//PUT /api/meals/:id
+
 router.put("/:id", async (request, response) => {
   try {
    // knex syntax for selecting things. Look up the documentation for knex for further info
@@ -71,7 +79,11 @@ router.put("/:id", async (request, response) => {
   }
 });
 
+
 //DELETE /api/reservations/:id
+
+//DELETE /api/meals/:id
+
 router.delete("/:id", async (request, response) => {
   try {
    // knex syntax for selecting things. Look up the documentation for knex for further info
