@@ -1,16 +1,15 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import TestComponent from "./components/TestComponent/TestComponent";
-​
 function App() {
   return (
     <Routes>
-      {/*  your routes here like:
-      <Route exact path="/meals" element={<TestComponent />} /> */}
+  
+      <Route exact path="/meals" element={<TestComponent />} /> 
+      
     </Routes>
   );
 }
-​
 export default App;
 
 // import React from "react";
