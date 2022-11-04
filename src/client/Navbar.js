@@ -1,12 +1,11 @@
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
  
 export default function Navbar() {
     return(
         <div>
             <div>
-      <nav className="navbar navbar-dark navbar-expand bg-primary fixed-top">
-        <div className="container">
+      <nav >
+        <div >
           <button
             className="navbar-toggler"
             type="button"

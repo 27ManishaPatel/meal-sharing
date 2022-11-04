@@ -1,0 +1,50 @@
+.header_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    position: sticky;
+    top: 0px;
+    min-height: 8vh;
+    background-color: rgb(230, 243, 243);
+}
+.header-logo {
+    width: 150px;
+    border-radius: 10px;
+}
+
+.nav_bar {
+    display: flex;
+    border: 1px black;
+}
+
+.nav_bar {
+    list-style: none;
+
+
+}
+
+.nav_bar_link {
+    padding: 10px;
+    list-style: none;
+    text-decoration: none;
+    font-size: 26px;
+    font-family: 'Courier New', Courier, monospace;
+    color: rgb(233, 104, 24);
+
+}
+.main_container {
+    background-image: url('../Images/fruits.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+    background-size: 100% 100%;
+    background-color: rgba(255,255,255,0.5);
+    background-blend-mode: lighten;
+    width: 100%;
+    height: 400px;
+}
+.main_container img {
+    width: 100%;
+}
+
