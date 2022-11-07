@@ -6,19 +6,42 @@ background-position: center center;
 background-size: 100% 100%;
 background-color: rgba(255,255,255,0.5);
 background-blend-mode: lighten;
-
-margin: 50px;
+padding: 20px;
 display: flex;
 align-items: center;
 justify-content: center;
 flex-wrap: wrap;
-
 }
+
 .meals {
-    border: 1px solid black;
-    width: 200px;
-    height: 300px;
-    margin: 10px 30px;
+    border: 1px solid #be9647;
+    box-shadow: 5px 5px 6px 6px rgb(252, 209, 139);
+    border-radius: 20px;
+    width: 20%;
+    margin: 20px 30px;
     text-align: center;
     padding: 10px;
+}
+.title {
+    font-size: 25px;
+    color: #624203;
+    background-color: #f9f4ec;
+    border-radius: 10px;
+    box-shadow: 2px 2px 3px 3px rgb(252, 209, 139);
+    padding: 5px;
+}
+.id, .price{
+    font-size: 30px;
+    color: #913f0f;
+    font-weight: bold;
+    text-shadow: 3px 3px 3px #fcc14c;
+}
+.meal-image {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 2px 2px 3px 3px rgb(110, 99, 80);
+}
+.description, .price{
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
 }
