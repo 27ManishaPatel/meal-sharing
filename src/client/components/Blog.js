@@ -6,7 +6,12 @@ export default function Blog (){
     return(
         <div>
             <Header/>
-            <p>Blog</p>
+            <div>
+                <h1>Best Food Blogs to Sate your Hunger </h1>
+                <div>
+                    
+                </div>
+                </div>
             <Footer />
         </div>
        
