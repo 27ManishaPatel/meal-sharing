@@ -13,14 +13,15 @@ function App() {
   return (
     <div>
       <Routes>
-         <Route  exact path="/" element={<Home /> } /> 
-        <Route exact path="Menu" element={<Menu />} />
-        <Route exact path="Reservation" element={<Reservation />} />
-        <Route exact path="Review" element={<Review />} />
-        <Route exact path="Blog" element={<Blog />} />
+      <Route  exact path="/" element={<Home /> } />
+      <Route  exact path="Menu" element={<Menu /> } />
+      <Route  exact path="Reservation" element={<Reservation /> } />
+      <Route  exact path="Review" element={<Review /> } />
+      <Route  exact path="Blog" element={<Blog /> } />
       </Routes>
     </div>
   );
 }
 export default App;
+
 
