@@ -64,13 +64,19 @@ router.get("/", async (request, response) => {
       })
     }
     //api/meals?sort_key=price&sort_dir=desc
-  try{
-      const allMeals = await meals;
-        response.send(allMeals);
+    try {
+      // knex syntax for selecting things. Look up the documentation for knex for further info
+      const findTableData = await knex.select().table('meal')
+      if (findTableData.length === 0) {
+        response.status(404).json("Table data is not available")
+      } else {
+        response.json(findTableData);
+      }
     } catch (error) {
-     throw (error);
-   }
+      response.status(404).json({ error: "Bad Get Request" });
+    }
 });
+
 // POST /api/meals
 
 router.post("/", async (request, response) => {
