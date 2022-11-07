@@ -4,14 +4,17 @@
 
 
 router.get("/", async (request, response) => {
+          meals = knex.select().table('meal') 
+  try {
     //maxPrice
     if("maxPrice" in request.query){
       const maxPrice = Number(request.query.maxPrice);
       if(isNaN(maxPrice)){
         response.send('maxPrice should be a number!')
       }else{
-         meals = knex("meal").where("price", "<", maxPrice);
+        meals = knex("meal").where("price", "<", maxPrice);
       }
+      
     }
      //availableReservations
     if("availableReservations" in request.query){
@@ -61,12 +64,11 @@ router.get("/", async (request, response) => {
         }else if(sortKey == arr){
           meals = knex('meal').orderBy(arr)
         }
-      })
+      }) 
     }
     //api/meals?sort_key=price&sort_dir=desc
-    try {
       // knex syntax for selecting things. Look up the documentation for knex for further info
-      const findTableData = await knex.select().table('meal')
+      const findTableData = await meals
       if (findTableData.length === 0) {
         response.status(404).json("Table data is not available")
       } else {
