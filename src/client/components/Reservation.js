@@ -4,10 +4,9 @@ import Footer from "./Footer";
 
 export default function Reservation() {
 
-        fetch('/api/reservations').then(res => res.json()).then(res => {
+        fetch('/api/meals').then(res => res.json()).then(res => {
                 console.log(res) 
             })
-
     return (
         <div>
             <Header />

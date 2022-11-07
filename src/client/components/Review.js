@@ -9,12 +9,10 @@ export default function Review () {
     .then(data => {
         console.log(data)
     })
-   
     return(
         <div>
             <Header/>
             <Footer />
-        </div>
-       
+        </div>      
     )
 }
