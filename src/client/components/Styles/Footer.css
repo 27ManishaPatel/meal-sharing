@@ -1,13 +1,23 @@
+
 .footer_container {
     position: sticky;
     bottom: 0px;
+    padding-top: 5px;
     text-align: center;
-    bottom: 0px;
     min-height: 8vh;
-    background-color: rgb(230, 243, 243);
+    background-color: rgb(177, 222, 222);
+}
+.footer_container address{
+    padding: 10px;
+    font-size: 20px;
+    text-shadow: 3px 3px 3px rgb(244, 249, 249);
+}
+.add-title{
+    font-size: 22px;
+    color: rgb(156, 21, 21);
+    margin-left: 15px;
 }
 .footer_image img{
     margin: 10px;
-    padding: 10px;
     width: 50px;
 }

@@ -25,7 +25,7 @@ export default function Menu() {
         return (
             <div className='meals'>
                 <p key={item.id} className='title'>{item.title}</p>
-                <p className='id'>Id: {item.id}</p>
+                <p className='id'>Meal No: {item.id}</p>
                 <img className='meal-image' src={logo} />
                 <p className='description'>{item.description}</p>
                 <p className='price'>Price: {item.price}</p>
@@ -35,8 +35,9 @@ export default function Menu() {
 
     return (
         <>
+            
+            <div className='wrapper'>
             <Header />
-            <div >
                 {isLoading && <p>Loading...</p>}
                 {meal.length === 0 ? <p>There is no meal available</p> :
                 <div className='meal_container'>{ ListOfMeals }</div> 
