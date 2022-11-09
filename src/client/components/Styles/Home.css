@@ -43,15 +43,15 @@
 }
 
 .delicious-img{
-    width: 30%;
+    width: 25%;
     display: -webkit-box;
     margin-left: auto;
     margin-right: 10%;
 }
 .main-paragraph{
     display: flex;
-    justify-content: flex-end;
-    font-size: 27px;
+    justify-content: flex-start;
+    font-size: 25px;
     margin-right: 10%;
 }
 .main-paragraph p{
