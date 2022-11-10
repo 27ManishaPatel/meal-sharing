@@ -1,0 +1,52 @@
+.blog-container{
+    text-align: center;
+    margin: auto;
+   
+}
+.blog-container h1{
+    padding-top: 50px;
+    font-size: 50px;
+    color: rgb(14, 134, 147);
+    text-shadow: 2px 2px 2px rgb(3, 67, 74);
+}
+.blog-render{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0px 50px;
+}
+.food-blog{
+    width: 28%;
+    padding: 10px;
+    border-radius: 20px;
+    background-color :rgb(42, 133, 143);;
+    margin: 20px;
+}
+.food-blog a {
+text-decoration: none;
+font-size: 20px;
+}
+.food-blog img{
+    width: 95%;
+}
+.food-blog h2{
+    font-size: 25px;
+    margin-top: 0px;
+    margin-left: 5px;
+    text-align: left;
+    font-family: sans-serif;
+    color: rgb(149, 30, 17);
+}
+.food-blog p{
+    width: 95%;
+    font-size: 20px;
+    text-align: justify;
+    color: black;
+    opacity: 0.6;
+    margin: auto;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.read-more-text{
+    margin-left: 5px;
+    color: rgb(0, 0, 255);
+    font-size: 24px;
+}
