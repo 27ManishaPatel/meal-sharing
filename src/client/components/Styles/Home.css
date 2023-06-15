@@ -1,0 +1,59 @@
+.wrapper {
+    background-image: url('../Images/fruits.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+    background-size: 100% 100%;
+    background-color: rgba(255, 255, 255, 0.5);
+    background-blend-mode: lighten;
+    padding-bottom: 40px;
+}
+
+.header_container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: auto;
+    position: sticky;
+    top: 0px;
+    min-height: 8vh;
+}
+
+.header-logo {
+    width: 150px;
+}
+
+.nav_bar {
+    display: flex;
+    list-style: none
+}
+
+.nav_bar_link {
+    margin: 10px;
+    text-decoration: none;
+    color: rgb(238, 56, 15);
+    font-size: 35px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-shadow: 5px 5px 5px rgb(124, 216, 216);
+
+}
+
+.main_container img {
+    width: 100%;
+}
+
+.delicious-img{
+    width: 25%;
+    display: -webkit-box;
+    margin-left: auto;
+    margin-right: 10%;
+}
+.main-paragraph{
+    display: flex;
+    justify-content: flex-start;
+    font-size: 25px;
+    margin-right: 10%;
+}
+.main-paragraph p{
+    text-align: center;
+}

@@ -1,0 +1,39 @@
+.review-header{
+    background-color: blue;
+    
+}
+.review_container {
+    background-image: url('../Images/review.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-size: 100% 100%;
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.reviews {
+    border: 1px solid #be9647;
+    box-shadow: 5px 5px 6px 6px rgb(160, 147, 125);
+    border-radius: 20px;
+    width: 20%;
+    margin: 20px 30px;
+    text-align: center;
+    padding: 10px;
+}
+.list-reviews {
+    font-size: 20px;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.review-title {
+    font-size: 25px;
+    color: white;
+    background-color: #897350;
+    border-radius: 10px;
+    box-shadow: 2px 2px 3px 3px rgb(160, 147, 125);
+    padding: 5px;
+}

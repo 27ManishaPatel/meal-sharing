@@ -119,11 +119,10 @@ router.get("/:id", async (request, response) => {
     // knex syntax for selecting things. Look up the documentation for knex for further info
      const meals = await knex("meal").select("*");
      if(meals.length === 0){
-      response.status(404).send("No meals available !")
-     }else{
-      response.send(meals);
-     }
-    } catch (error) {
+      response.status(404).send("No meals available !") ;
+    }else {
+    response.send(meals) 
+    } }catch (error) {
       throw response.status(404).send(error);
     }
  });
